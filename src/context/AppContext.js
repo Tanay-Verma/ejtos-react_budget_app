@@ -60,7 +60,14 @@ export const AppReducer = (state, action) => {
         case 'SET_BUDGET':
             action.type = "DONE";
             state.budget = action.payload;
-
+            if(state.budget > 20000){
+                alert('Budget cannot be more than 20000')
+                state.budget = 20000;
+            }
+            else if(state.budget < 0){
+                alert('Budget cannot be more than 0');
+                state.budget = 0;
+            }
             return {
                 ...state,
             };
@@ -106,6 +113,7 @@ export const AppProvider = (props) => {
         remaining = state.budget - totalExpenses;
     }
 
+    console.log(state.budget)
     return (
         <AppContext.Provider
             value={{
